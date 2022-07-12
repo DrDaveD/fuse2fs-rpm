@@ -1,6 +1,6 @@
 Name: fuse2fs
 Version: 1.46.5
-Release: 2
+Release: 3%{?dist}
 Summary: FUSE file system client for ext2/ext3/ext4 file systems
 License: GPLv2 and LGPLv2 and BSD and MIT
 URL: http://e2fsprogs.sourceforge.net
@@ -22,10 +22,10 @@ command from a more recent e2fsprogs.
 
 %build
 %configure
-make SUBDIRS=misc %{?_smp_mflags}
+%make_build SUBDIRS=misc %{?_smp_mflags}
 
 %check
-make SUBDIRS=misc fullcheck
+%make_build SUBDIRS=misc fullcheck
 
 %install
 mkdir -p %{buildroot}%{_sbindir}/
@@ -41,6 +41,9 @@ cp -p misc/%{name}.1 %{buildroot}%{_mandir}/man1
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Tue Jul 12 2022 Dave Dykstra <dwd@fnal.gov> 1.46.5-3
+- Add using %make_build, overlooked from first round
+
 * Tue Jul 12 2022 Dave Dykstra <dwd@fnal.gov> 1.46.5-2
 - Respond to first round of review comments
 
