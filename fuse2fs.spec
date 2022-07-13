@@ -1,6 +1,6 @@
 Name: fuse2fs
 Version: 1.46.5
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: FUSE file system client for ext2/ext3/ext4 file systems
 License: GPLv2 and LGPLv2 and BSD and MIT
 URL: http://e2fsprogs.sourceforge.net
@@ -22,7 +22,7 @@ command from a more recent e2fsprogs.
 
 %build
 %configure
-%make_build SUBDIRS=misc %{?_smp_mflags}
+%make_build SUBDIRS=misc
 
 %check
 %make_build SUBDIRS=misc fullcheck
@@ -41,6 +41,9 @@ cp -p misc/%{name}.1 %{buildroot}%{_mandir}/man1
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Wed Jul 13 2022 Dave Dykstra <dwd@fnal.gov> 1.46.5-4
+- Remove _smp_flags macro from make_build
+
 * Tue Jul 12 2022 Dave Dykstra <dwd@fnal.gov> 1.46.5-3
 - Add using %make_build, overlooked from first round
 
