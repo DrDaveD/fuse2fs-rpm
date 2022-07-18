@@ -1,6 +1,6 @@
 Name: fuse2fs
 Version: 1.46.5
-Release: 5%{?dist}
+Release: 6%{?dist}
 Summary: FUSE file system client for ext2/ext3/ext4 file systems
 # License explanation from the e2fsprogs NOTICE file:
 #  This package, the EXT2 filesystem utilities, are made available under
@@ -31,6 +31,7 @@ command from a more recent e2fsprogs.
 %build
 %configure
 %make_build SUBDIRS=misc
+cp -p lib/uuid/COPYING libuuid.COPYING
 
 %check
 %make_build SUBDIRS=misc fullcheck
@@ -45,10 +46,14 @@ cp -p misc/%{name}.1 %{buildroot}%{_mandir}/man1
 %doc README
 %{!?_licensedir:%global license %%doc}
 %license NOTICE
+%license libuuid.COPYING
 %{_sbindir}/%{name}
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Mon Jul 18 2022 Dave Dykstra <dwd@fnal.gov> 1.46.5-6
+- Mark libuuid.COPYING as a license
+
 * Fri Jul 15 2022 Dave Dykstra <dwd@fnal.gov> 1.46.5-5
 - Add description of multiple licenses
 - Remove Requires: fuse-libs
